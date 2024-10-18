@@ -1,0 +1,77 @@
+#include<iostream>
+#include<vector>
+#include<cctype>
+using namespace std;
+void name(string name1,string name2){
+    vector<char> flames = {'F', 'L', 'A', 'M', 'E', 'S'};
+    int index=0;
+
+    // Iterate through each character of name1
+    for (int i = 0; i < name1.size(); ++i) {
+        name1[i]=toupper(name1[i]);
+        name2[i]=toupper(name2[i]);
+        // Check if the current character in name1 is in name2
+        size_t pos = name2.find(name1[i]);
+        
+        if (pos != std::string::npos) {
+            // Character found in both names, so remove from both strings
+            name1.erase(i, 1);  // Remove from name1
+            name2.erase(pos, 1); // Remove from name2
+            --i; // Adjust index to account for the erased character in name1
+        }
+        
+}
+    string name3;
+    name3=name1+name2;
+    //counts the numbers of charcters left 
+   int number=size(name3);
+    while (flames.size() > 1) {
+        // Calculate the index to be removed
+        index = (index + number - 1) % flames.size();
+        flames.erase(flames.begin() + index);  // Remove the letter at the calculated index
+    }
+    //switchs the cases based on the letter left
+    switch(flames[0]){
+        case 'F':
+        cout<<"F->FRIENDS"<<endl;
+        break;
+        case 'L':
+        cout<<"L->LOVE"<<endl;
+        break;
+        case 'A':
+        cout<<"A->ATTRACTION"<<endl;
+        break;
+        case 'M':
+        cout<<"M->MARRIAGE"<<endl;
+        break;
+        case 'E':
+        cout<<"E->ENEMY"<<endl;
+        break;
+        case 'S':
+        cout<<"S->SISTER"<<endl;
+        break;
+    }
+}
+//To increase the understandability of the user
+    void display(){
+        cout<<"---------FLAMES----------"<<endl;
+        cout<<endl;
+        cout<<"F->FRIENDS"<<endl;
+        cout<<"L->LOVE"<<endl;
+        cout<<"A->ATTRACTION"<<endl;
+        cout<<"M->MARRIAGE"<<endl;
+        cout<<"E->ENEMY"<<endl;
+        cout<<"S->SISTER"<<endl;
+    }
+int main()
+{  
+   display();
+   //Takes the names from the user
+    string s1,s2;
+    cout<<"Enter the name of the boy :";
+    getline(cin,s1);
+    cout<<"Enter the name of the girl :";
+    getline(cin,s2);
+    name(s1,s2);
+return 0;
+}
